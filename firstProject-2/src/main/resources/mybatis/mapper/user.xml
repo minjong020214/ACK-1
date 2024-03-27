@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.demo.dao.UserMapper">
+	<select id="findUserAll" resultType="UserDto">
+		SELECT region_id,region_name FROM REGIONS
+	</select>
+	<select id="findIdByUser" parameterType="int" resultType="UserDto">
+		SELECT region_id
+		    ,region_name 
+		FROM REGIONS
+		WHERE region_id = #{id}
+	</select>
+	<insert id="setUser" parameterType="UserDto">
+		INSERT INTO regions VALUES(seq_region_id.nextval,#{regionName})
+	</insert>
+	<insert id="setUserById" parameterType="UserDto">
+		INSERT INTO regions VALUES(#{regionId} , #{regionName})
+	</insert>
+	<update id="updateUserById" parameterType="UserDto">
+		UPDATE regions 
+		SET region_name = #{regionName}
+		WHERE region_id = #{regionId}
+	</update>
+	<delete id="deleteUserById" parameterType="int">
+		DELETE regions WHERE region_id = #{regionId}
+	</delete>
+	
+</mapper>
